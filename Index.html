@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABDUL REHMAN ARAIN - Web Developer</title>
+    <!-- We're using a clean, modern font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Base Styles and Colors */
+        :root {
+            --primary-color: #2c3e50; /* Deep blue-grey */
+            --accent-color: #3498db;   /* Bright, professional blue */
+            --text-light: #ecf0f1;
+            --text-dark: #333;
+            --bg-light: #f4f7f6;
+            --font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent scrollbar during animations */
+        }
+
+        /* --- NEW ANIMATION KEYFRAMES --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes zoomInEffect {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* --- ANIMATION CLASSES --- */
+        .animate-nav { animation: fadeInDown 0.8s ease-out forwards; }
+        .animate-hero-img { animation: zoomInEffect 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        .animate-hero-text { animation: fadeInUp 1s ease-out 0.4s forwards; opacity: 0; }
+        
+        /* Scroll Reveal Base Classes */
+        .reveal { 
+            opacity: 0; 
+            transition: all 1s ease-out; 
+        }
+        
+        .slide-left.reveal { transform: translateX(-100px); }
+        .slide-right.reveal { transform: translateX(100px); }
+        .fade-up.reveal { transform: translateY(50px); }
+
+        /* Triggered when in view */
+        .reveal.active { 
+            opacity: 1; 
+            transform: translate(0, 0); 
+        }
+
+        /* --- Header / Navigation --- */
+        header {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            /* Navigation Animation applied here */
+            animation: fadeInDown 0.8s ease-out; 
+        }
+
+        .nav-container {
+            width: 85%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-light);
+            font-weight: 400;
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: inline-block;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        /* --- Hero Section --- */
+        #hero {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin-top: 60px; 
+            background: linear-gradient(135deg, rgba(44,62,80,1) 0%, rgba(52,152,219,1) 100%);
+            color: var(--text-light);
+            flex-direction: column; 
+            gap: 20px; 
+        }
+
+        .hero-image-container {
+            margin-bottom: 20px;
+            /* Hero Image Animation class */
+            animation: zoomInEffect 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .hero-profile-img {
+            width: 180px;  
+            height: 180px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 6px solid rgba(255, 255, 255, 0.3); 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2); 
+            transition: transform 0.3s ease;
+        }
+
+        .hero-profile-img:hover {
+            transform: scale(1.1);
+        }
+
+        .hero-content {
+            /* Hero Text Animation class */
+            animation: fadeInUp 1s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            margin-top: 0;
+            font-weight: 700;
+        }
+
+        .hero-content h2 {
+            font-size: 2rem;
+            font-weight: 300;
+            opacity: 0.9;
+            margin-top: 0;
+        }
+
+        /* --- Main Content Structure --- */
+        .container {
+            width: 85%;
+            margin: 0 auto;
+            padding: 5rem 0;
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        section h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* --- About Me Section --- */
+        #about {
+            background-color: white;
+            padding: 5rem 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .about-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-image-container {
+            flex: 1;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover; 
+            border: 8px solid white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            transition: transform 0.5s ease, box-shadow 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: rotate(3deg) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .about-text {
+            flex: 2;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info {
+            background-color: var(--bg-light);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 5px solid var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .contact-info:hover {
+            transform: translateX(10px);
+        }
+
+        .contact-info p {
+            margin: 10px 0;
+            font-weight: 600;
+        }
+
+        .contact-label {
+            color: var(--primary-color);
+            font-weight: 400;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            .hero-content h2 { font-size: 1.3rem; }
+            .hero-profile-img { width: 140px; height: 140px; } 
+            .about-flex { flex-direction: column-reverse; text-align: center; }
+            .about-image-container { margin-top: 2rem; }
+            .profile-img { width: 220px; height: 220px; }
+            .nav-container { width: 90%; }
+            nav ul { font-size: 0.8rem; gap: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">ABDUL REHMAN ARAIN</div>
+            <nav>
+                <ul>
+                    <li><a href="#hero">Home</a></li>
+                    <li><a href="#about">About Me</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-image-container">
+            <img src="file:///C:/Users/Administrator/Desktop/aacea58a-b25d-4366-957d-c626e860baec.jpg" alt="Abdul Rehman Arain" class="hero-profile-img">
+        </div>
+        <div class="hero-content">
+            <h1>ABDUL REHMAN ARAIN</h1>
+            <h2>I AM WEB DEVELOPER</h2>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+
+        <!-- About Me Section -->
+        <section id="about">
+            <h2 class="reveal fade-up">About Me</h2>
+            <div class="about-flex">
+                <div class="about-text reveal slide-left">
+                    <p>Hello! My name is <strong>Abdul Rehman Arain</strong>. I am a passionate, driven, and professional <strong>Web Developer</strong>.</p>
+                    
+                    <p>My journey in web development is focused on creating dynamic, responsive, and user-centric websites. I am dedicated to mastering the latest technologies to turn complex problems into elegant, functional designs. I believe in continuous learning and building a portfolio that showcases innovation and clean code.</p>
+
+                    <div class="contact-info">
+                        <p><span class="contact-label">Name:</span> ABDUL REHMAN ARAIN</p>
+                        <p><span class="contact-label">Occupation:</span> Web Developer</p>
+                        <p><span class="contact-label">Contact (Call/WhatsApp):</span> 03120313186</p>
+                        <p><span class="contact-label">Email:</span>abdulrehmanaijaz2013@gmail.com</p>
+                    </div>
+                </div>
+                
+                <div class="about-image-container reveal slide-right">
+                    <img src="file:///C:/Users/Administrator/Desktop/aacea58a-b25d-4366-957d-c626e860baec.jpg" alt="Abdul Rehman Arain" class="profile-img">
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+         <p><head2>If you want to make any type of websites so contact me.</head2></p>
+        <p>&copy; 2025 ABDUL REHMAN ARAIN. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Intersection Observer logic for scroll-triggered animations
+        const observerOptions = { threshold: 0.2 };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        // Targeted elements to observe
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+</html>
